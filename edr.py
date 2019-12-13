@@ -23,10 +23,12 @@ while(True):
     r = np.log(float_frame / float_ema)
     on = r - 0.02
     off = -0.02 - r
-    on = 255 * (on > 0)
-    off = 255 * (off > 0)
+    on = on > 0
+    off = off > 0
     on = np.uint8(on)
     off = np.uint8(off)
+    on = 255 * on
+    off = 255 * off
     #on = cv2.cvtColor(on,cv2.COLOR_BGR2GRAY)
     on = cv2.cvtColor(on,cv2.COLOR_GRAY2BGR)
     on[:,:,0] = 0
