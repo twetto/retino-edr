@@ -6,7 +6,7 @@ https://ieeexplore.ieee.org/document/8878127
 ## Usage
 
 ```bash
-python edr.py
+./edr.py
 ```
 
 You can change alpha (0.833) and threshold (0.02) accordingly.
