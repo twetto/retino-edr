@@ -23,12 +23,18 @@ while(True):
     r = np.log(float_frame / float_ema)
     on = r - 0.02
     off = -0.02 - r
-    on = on > 0
-    off = off > 0
-    on = np.uint8(on)
-    off = np.uint8(off)
+    is_there_an_on_event = on > 0
+    is_there_an_off_event = off > 0
+    is_there_an_event = is_there_an_on_event + is_there_an_off_event
+    on = is_there_an_on_event
+    off = is_there_an_off_event
+    density_on = np.sum(on) / np.sum(is_there_an_event)
+    density_off = np.sum(off) / np.sum(is_there_an_event)
+    density = density_on + density_off
     on = 255 * on
     off = 255 * off
+    on = np.uint8(on)
+    off = np.uint8(off)
     #on = cv2.cvtColor(on,cv2.COLOR_BGR2GRAY)
     on = cv2.cvtColor(on,cv2.COLOR_GRAY2BGR)
     on[:,:,0] = 0
@@ -41,6 +47,7 @@ while(True):
     cv2.imshow('EDR',edr)
     #writer.write(edr)
 
+    #ema = np.uint8(float_ema)
     #cv2.imshow('EMA',ema)
     cv2.imshow('frame',frame)
     float_p_ema = float_ema
