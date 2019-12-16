@@ -8,21 +8,21 @@ import time
 cap = cv2.VideoCapture(0 + cv2.CAP_V4L2)
 ret, p_ema = cap.read()
 p_ema = cv2.cvtColor(p_ema,cv2.COLOR_BGR2GRAY)
-#p_ema = cv2.resize(p_ema,(640,360))
+#p_ema = cv2.resize(p_ema,(160,120))
 float_p_ema = np.float32(p_ema)
 
 while(True):
     ret, frame = cap.read()
     if not ret: break
     frame = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
-    #frame = cv2.resize(frame,(640,360))
+    #frame = cv2.resize(frame,(160,120))
     float_frame = np.float32(frame)
     #ema = (p_ema >> 1) + (frame >> 1)
     
     float_ema = float_p_ema * 0.167 + float_frame * 0.833
-    r = np.log(float_frame / float_ema)
-    on = r - 0.02
-    off = -0.02 - r
+    #r = float_frame - float_ema
+    on = float_frame - float_ema - 2
+    off = float_ema - float_frame - 2
     is_there_an_on_event = on > 0
     is_there_an_off_event = off > 0
     is_there_an_event = is_there_an_on_event + is_there_an_off_event
