@@ -9,4 +9,4 @@ https://ieeexplore.ieee.org/document/8878127
 ./edr.py
 ```
 
-You can change alpha (0.833) and threshold (0.02) accordingly.
+You can change alpha (0.833) and threshold (3) accordingly.

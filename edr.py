@@ -20,9 +20,8 @@ while(True):
     #ema = (p_ema >> 1) + (frame >> 1)
     
     float_ema = float_p_ema * 0.167 + float_frame * 0.833
-    #r = float_frame - float_ema
-    on = float_frame - float_ema - 2
-    off = float_ema - float_frame - 2
+    on = float_frame - float_ema - 3
+    off = float_ema - float_frame - 3
     is_there_an_on_event = on > 0
     is_there_an_off_event = off > 0
     is_there_an_event = is_there_an_on_event + is_there_an_off_event
@@ -35,11 +34,9 @@ while(True):
     off = 255 * off
     on = np.uint8(on)
     off = np.uint8(off)
-    #on = cv2.cvtColor(on,cv2.COLOR_BGR2GRAY)
     on = cv2.cvtColor(on,cv2.COLOR_GRAY2BGR)
     on[:,:,0] = 0
     on[:,:,1] = 0
-    #off = cv2.cvtColor(off,cv2.COLOR_BGR2GRAY)
     off = cv2.cvtColor(off,cv2.COLOR_GRAY2BGR)
     off[:,:,0] = 0
     off[:,:,2] = 0
